@@ -1,4 +1,4 @@
-package my.edu.utar.neixpasswordmanager.ui.home;
+package my.edu.utar.neixpasswordmanager.ui.pwdList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import my.edu.utar.neixpasswordmanager.R;
-import my.edu.utar.neixpasswordmanager.databinding.FragmentHomeBinding;
+import my.edu.utar.neixpasswordmanager.databinding.FragmentPwdListBinding;
 
-public class HomeFragment extends Fragment {
+public class PwdListFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private PwdListViewModel pwdListViewModel;
+    private FragmentPwdListBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        pwdListViewModel =
+                new ViewModelProvider(this).get(PwdListViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentPwdListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        pwdListViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
