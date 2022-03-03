@@ -1,4 +1,4 @@
-package my.edu.utar.neixpasswordmanager.ui.changeMasPwd;
+package my.edu.utar.neixpasswordmanager.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,7 +20,6 @@ public class ChangeMasPwdFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         binding = FragmentChangeMasPwdBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 

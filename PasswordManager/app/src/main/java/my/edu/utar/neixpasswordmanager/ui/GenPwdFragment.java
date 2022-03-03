@@ -1,4 +1,4 @@
-package my.edu.utar.neixpasswordmanager.ui.genPwd;
+package my.edu.utar.neixpasswordmanager.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
