@@ -16,24 +16,16 @@ import my.edu.utar.neixpasswordmanager.databinding.FragmentPwdListBinding;
 
 public class PwdListFragment extends Fragment {
 
-    private PwdListViewModel pwdListViewModel;
     private FragmentPwdListBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        pwdListViewModel =
-                new ViewModelProvider(this).get(PwdListViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentPwdListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        pwdListViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        TextView textView = binding.textPwdList;
+        textView.setText("Welcome to Password List Fragment");
+
         return root;
     }
 

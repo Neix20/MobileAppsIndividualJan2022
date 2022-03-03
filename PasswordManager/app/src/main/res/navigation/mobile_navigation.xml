@@ -3,17 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_pwd_list">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_pwd_list"
         android:name="my.edu.utar.neixpasswordmanager.ui.pwdList.PwdListFragment"
         android:label="@string/menu_pwd_list"
         tools:layout="@layout/fragment_pwd_list" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="my.edu.utar.neixpasswordmanager.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_gen_pwd"
+        android:name="my.edu.utar.neixpasswordmanager.ui.genPwd.GenPwdFragment"
         android:label="@string/menu_gen_pwd"
         tools:layout="@layout/fragment_gen_pwd" />
+
+    <fragment
+        android:id="@+id/nav_change_mas_pwd"
+        android:name="my.edu.utar.neixpasswordmanager.ui.changeMasPwd.ChangeMasPwdFragment"
+        android:label="@string/menu_change_mas_pwd"
+        tools:layout="@layout/fragment_change_mas_pwd" />
 </navigation>

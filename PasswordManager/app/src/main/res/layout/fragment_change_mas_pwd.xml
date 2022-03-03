@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pwdList.PwdListFragment">
+    tools:context=".ui.changeMasPwd.ChangeMasPwdFragment">
 
     <TextView
-        android:id="@+id/text_pwd_list"
+        android:id="@+id/text_change_mas_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="Welcome to Password List Page!"
+        android:text="Welcome to Change Master Password!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

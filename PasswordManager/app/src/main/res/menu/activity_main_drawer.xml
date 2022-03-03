@@ -5,15 +5,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/password_list"
+            android:id="@+id/nav_pwd_list"
             android:icon="@drawable/ic_baseline_list_alt_24"
             android:title="@string/menu_pwd_list" />
+
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_gen_pwd"
             android:icon="@drawable/ic_baseline_vpn_key_24"
             android:title="@string/menu_gen_pwd" />
+
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_change_mas_pwd"
+            android:icon="@drawable/ic_baseline_remove_red_eye_24"
+            android:title="@string/menu_change_mas_pwd"/>
+
+        <item
+            android:id="@+id/nav_exit"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:title="@string/menu_exit" />
     </group>

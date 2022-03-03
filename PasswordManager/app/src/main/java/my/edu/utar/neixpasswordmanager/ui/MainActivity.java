@@ -1,13 +1,18 @@
-package my.edu.utar.neixpasswordmanager;
+package my.edu.utar.neixpasswordmanager.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import my.edu.utar.neixpasswordmanager.R;
 import my.edu.utar.neixpasswordmanager.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,12 +55,27 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_pwd_list, R.id.nav_gen_pwd, R.id.nav_change_mas_pwd)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_exit) {
+               new AlertDialog.Builder(this)
+                        .setMessage("Are you sure you want to exit?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", (dialog, id) -> finish())
+                        .setNegativeButton("No", (dialog, id) -> dialog.cancel())
+                        .show();
+
+            } else {
+                NavigationUI.onNavDestinationSelected(item, navController);
+                drawer.closeDrawers();
+            }
+            return false;
+        });
     }
 
     @Override

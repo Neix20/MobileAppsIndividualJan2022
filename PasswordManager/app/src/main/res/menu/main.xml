@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/option_export"
-        android:icon="@drawable/ic_baseline_import_export_24"
-        android:title="@string/option_export" />
+<!--    <item-->
+<!--        android:id="@+id/option_search"-->
+<!--        android:icon="@drawable/ic_baseline_search_24"-->
+<!--        app:showAsAction="always|collapseActionView"-->
+<!--        app:actionViewClass="androidx.appcompat.widget.SearchView"-->
+<!--        android:title="@string/option_search" />-->
+
+   <item
+       android:title="@string/option_menu"
+       android:icon="@drawable/ic_baseline_more_vert_24"
+       app:showAsAction="always">
+       <menu>
+           <item
+               android:orderInCategory="100"
+               android:id="@+id/option_export"
+               android:icon="@drawable/ic_baseline_import_export_24"
+               android:title="@string/option_export"
+               app:showAsAction="never" />
+       </menu>
+   </item>
 </menu>
