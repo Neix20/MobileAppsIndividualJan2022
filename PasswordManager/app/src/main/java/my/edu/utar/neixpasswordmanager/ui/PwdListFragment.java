@@ -3,6 +3,7 @@ package my.edu.utar.neixpasswordmanager.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -46,8 +47,6 @@ public class PwdListFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this.getActivity()).get(PwdListViewModel.class);
 
-//        viewModel.deleteAllPassword();
-
         mAdapter = new PwdListAdapter(this.getActivity());
 
         mRecyclerView.setAdapter(mAdapter);
@@ -61,6 +60,23 @@ public class PwdListFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int pos = item.getOrder();
+
+        // Alert Dialog
+
+        PasswordElem pwd = viewModel.getPwdList().getValue().get(pos);
+
+        viewModel.deletePassword(pwd);
+
+        viewModel.getPwdList().observe(this, pwdList -> {
+            mAdapter.updateList(pwdList);
+        });
+
+        return super.onContextItemSelected(item);
     }
 
 

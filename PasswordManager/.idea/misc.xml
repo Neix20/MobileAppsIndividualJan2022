@@ -11,6 +11,7 @@
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/drawable/side_nav_bar.xml" value="0.2703125" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/activity_add_pwd.xml" value="0.4" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/activity_edit_pwd.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/app_bar_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
@@ -25,6 +26,8 @@
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/menu/main.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/menu/menu_add.xml" value="0.25416666666666665" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/menu/menu_delete.xml" value="0.25416666666666665" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/menu/menu_edit.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

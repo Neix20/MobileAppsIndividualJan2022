@@ -18,4 +18,13 @@
     <color name="secondary_light">#80d6ff</color>
     <color name="secondary_dark">#0077c2</color>
 
+    <string-array name="icon_colors">
+        <item>#78002e</item>
+        <item>#3e2723</item>
+        <item>#dd2c00</item>
+        <item>#7200ca</item>
+        <item>#0a00b6</item>
+        <item>#255d00</item>
+    </string-array>
+
 </resources>

@@ -22,7 +22,7 @@ public class PasswordElemRepository {
         return passwordElemList;
     }
 
-    public PasswordElem getPassword(int pwdId) throws ExecutionException, InterruptedException {
+    public PasswordElem getPassword(long pwdId) throws ExecutionException, InterruptedException {
         return new getPasswordAsync(mPasswordElemDao).execute(pwdId).get();
     }
 
@@ -42,7 +42,7 @@ public class PasswordElemRepository {
         new deleteAllPasswordAsync(mPasswordElemDao).execute();
     }
 
-    private static class getPasswordAsync extends AsyncTask<Integer, Void, PasswordElem> {
+    private static class getPasswordAsync extends AsyncTask<Long, Void, PasswordElem> {
 
         private PasswordElemDao mPasswordElemDaoAsync;
 
@@ -51,7 +51,7 @@ public class PasswordElemRepository {
         }
 
         @Override
-        protected PasswordElem doInBackground(Integer... ids) {
+        protected PasswordElem doInBackground(Long... ids) {
             return mPasswordElemDaoAsync.getPasswordElem(ids[0]);
         }
     }

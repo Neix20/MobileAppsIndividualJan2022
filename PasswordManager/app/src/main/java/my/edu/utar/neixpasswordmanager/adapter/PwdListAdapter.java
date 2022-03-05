@@ -1,7 +1,13 @@
 package my.edu.utar.neixpasswordmanager.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,15 +22,21 @@ import java.util.List;
 
 import my.edu.utar.neixpasswordmanager.R;
 import my.edu.utar.neixpasswordmanager.data.PasswordElem;
+import my.edu.utar.neixpasswordmanager.ui.EditPwdActivity;
+import my.edu.utar.neixpasswordmanager.ui.PwdListFragment;
 
 public class PwdListAdapter extends RecyclerView.Adapter<PwdListAdapter.PwdViewHolder>{
 
+    public static final String TAG = PwdListAdapter.class.getSimpleName();
+
     private List<PasswordElem> mPwdList;
     private LayoutInflater mInflater;
+    private String[] colors;
 
     public PwdListAdapter(Context mContext) {
         this.mPwdList = new ArrayList<PasswordElem>();
         this.mInflater = LayoutInflater.from(mContext);
+        this.colors = mContext.getResources().getStringArray(R.array.icon_colors);
     }
 
     @NonNull
@@ -37,6 +49,13 @@ public class PwdListAdapter extends RecyclerView.Adapter<PwdListAdapter.PwdViewH
     @Override
     public void onBindViewHolder(PwdListAdapter.PwdViewHolder viewHolder, int position) {
         PasswordElem curPwd = mPwdList.get(position);
+
+        // Update Icon TextView
+        int f_val = (int) curPwd.title.toUpperCase().charAt(0);
+        int ind = (int) ((f_val - 65) / 26.0 * colors.length);
+
+        viewHolder.icon_item_txt.setText(curPwd.title.substring(0, 1).toUpperCase());
+        viewHolder.icon_item_txt.setBackgroundColor(Color.parseColor(colors[ind]));
 
         // Bind Password Element to RecycleView List Item
         viewHolder.title_item_txt.setText(curPwd.title);
@@ -58,7 +77,8 @@ public class PwdListAdapter extends RecyclerView.Adapter<PwdListAdapter.PwdViewH
         diffResult.dispatchUpdatesTo(this);
     }
 
-    class PwdViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    class PwdViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
+        TextView icon_item_txt;
         TextView title_item_txt;
         TextView name_item_txt;
         TextView website_item_txt;
@@ -67,11 +87,15 @@ public class PwdListAdapter extends RecyclerView.Adapter<PwdListAdapter.PwdViewH
 
         public PwdViewHolder(View itemView, PwdListAdapter mAdapter) {
             super(itemView);
+            icon_item_txt = itemView.findViewById(R.id.icon_item_txt);
             title_item_txt = itemView.findViewById(R.id.title_item_txt);
             name_item_txt = itemView.findViewById(R.id.name_item_txt);
             website_item_txt = itemView.findViewById(R.id.website_item_txt);
+
             this.mAdapter = mAdapter;
+
             itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
         }
 
 
@@ -80,18 +104,17 @@ public class PwdListAdapter extends RecyclerView.Adapter<PwdListAdapter.PwdViewH
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
 
-            // Spawn Edit page Activity
-            Toast.makeText(view.getContext(), mPosition + "", Toast.LENGTH_SHORT).show();
+            PasswordElem pwd = mPwdList.get(mPosition);
 
-            // Notify the adapter that the data has changed so it can
-            // update the RecyclerView to display the data.
-            mAdapter.notifyDataSetChanged();
+            // Spawn Edit page Activity
+            Intent intent = new Intent(view.getContext(), EditPwdActivity.class);
+            intent.putExtra("id", pwd.getId());
+            view.getContext().startActivity(intent);
         }
 
-        @Override
-        public boolean onLongClick(View view) {
-            // Delete
-            return false;
+
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            MenuItem delete = contextMenu.add(Menu.NONE, 1, getAdapterPosition(), "Delete"); // groupId, itemId, order, title
         }
     }
 }

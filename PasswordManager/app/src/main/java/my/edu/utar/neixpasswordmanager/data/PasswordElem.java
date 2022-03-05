@@ -33,6 +33,15 @@ public class PasswordElem {
     @ColumnInfo(name = "last_updated_date")
     public Calendar last_updated_date;
 
+    public PasswordElem(){
+        this.title = "";
+        this.username = "";
+        this.password = "";
+        this.website = "";
+        this.created_date = Calendar.getInstance();
+        this.last_updated_date = Calendar.getInstance();
+    }
+
     public PasswordElem(String title, String username, String password, String website) {
         this.title = title;
         this.username = username;
@@ -98,6 +107,14 @@ public class PasswordElem {
         this.last_updated_date = last_updated_date;
     }
 
+    public void updateValue(String[] arr){
+        this.title = arr[0];
+        this.username = arr[1];
+        this.password = arr[2];
+        this.website = arr[3];
+        this.last_updated_date = Calendar.getInstance();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,5 +130,18 @@ public class PasswordElem {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, username, password, website, created_date, last_updated_date);
+    }
+
+    @Override
+    public String toString() {
+        return "PasswordElem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", website='" + website + '\'' +
+                ", created_date=" + created_date +
+                ", last_updated_date=" + last_updated_date +
+                '}';
     }
 }

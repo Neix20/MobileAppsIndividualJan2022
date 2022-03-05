@@ -1,12 +1,16 @@
 package my.edu.utar.neixpasswordmanager.ui;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -14,19 +18,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.util.concurrent.ExecutionException;
+
 import my.edu.utar.neixpasswordmanager.R;
 import my.edu.utar.neixpasswordmanager.Utils.util;
 import my.edu.utar.neixpasswordmanager.adapter.PwdListViewModel;
 import my.edu.utar.neixpasswordmanager.data.PasswordElem;
-import my.edu.utar.neixpasswordmanager.databinding.ActivityAddPwdBinding;
+import my.edu.utar.neixpasswordmanager.databinding.ActivityEditPwdBinding;
 
-public class AddPwdActivity extends AppCompatActivity {
+public class EditPwdActivity extends AppCompatActivity {
+    public static final String TAG = EditPwdActivity.class.getSimpleName();
 
-    public static final String TAG = AddPwdActivity.class.getSimpleName();
-
-    private ActivityAddPwdBinding binding;
+    private ActivityEditPwdBinding binding;
 
     private PwdListViewModel viewModel;
+
+    private PasswordElem curPwd;
 
     private EditText title_txt;
     private EditText name_txt;
@@ -35,12 +42,24 @@ public class AddPwdActivity extends AppCompatActivity {
 
     private ImageView show_pass_btn;
 
-    @Override
+    private ImageView title_copy_btn;
+    private ImageView name_copy_btn;
+    private ImageView pwd_copy_btn;
+    private ImageView website_copy_btn;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityAddPwdBinding.inflate(getLayoutInflater());
+        binding = ActivityEditPwdBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Add Back Button at ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        // Initialize Objects
+        viewModel = ViewModelProviders.of(EditPwdActivity.this).get(PwdListViewModel.class);
 
         // Binding Java Element to XML
         title_txt = binding.titleTxt;
@@ -50,22 +69,45 @@ public class AddPwdActivity extends AppCompatActivity {
 
         show_pass_btn = binding.showPassBtn;
 
-        // Initialize Objects
-        viewModel = ViewModelProviders.of(AddPwdActivity.this).get(PwdListViewModel.class);
+        title_copy_btn = binding.titleCopyBtn;
+        name_copy_btn = binding.nameCopyBtn;
+        pwd_copy_btn = binding.pwdCopyBtn;
+        website_copy_btn = binding.websiteCopyBtn;
 
-        // Add Back Button at ActionBar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent mIntent = getIntent();
+        Long ind = (long) mIntent.getLongExtra("id", 0);
+
+        try {
+            curPwd = viewModel.getPassword(ind);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        
+        title_txt.setText(curPwd.getTitle());
+        name_txt.setText(curPwd.getUsername());
+        pwd_txt.setText(curPwd.getPassword());
+        website_txt.setText(curPwd.getWebsite());
 
         show_pass_btn.setOnClickListener(v -> ShowHidePass(v));
 
+        title_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Title", title_txt.getText().toString()));
+        name_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Name", name_txt.getText().toString()));
+        pwd_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Password", pwd_txt.getText().toString()));
+        website_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Website", website_txt.getText().toString()));
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add, menu);
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
 
@@ -87,10 +129,14 @@ public class AddPwdActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
 
-            PasswordElem pwd = new PasswordElem();
-            pwd.updateValue(txt_arr);
-            viewModel.insertPassword(pwd);
-            Toast.makeText(this, "Successfully Save Record!", Toast.LENGTH_SHORT).show();
+            curPwd.updateValue(txt_arr);
+            viewModel.updatePassword(curPwd);
+            Toast.makeText(this, "Successfully Edited Record!", Toast.LENGTH_SHORT).show();
+            finish();
+        } else if(id == R.id.option_delete){
+            // Alert Box
+            viewModel.deletePassword(curPwd);
+            Toast.makeText(this, "Successfully Deleted Record!", Toast.LENGTH_SHORT).show();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -109,12 +155,5 @@ public class AddPwdActivity extends AppCompatActivity {
             //Hide Password
             pwd_txt.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
-    }
-
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
     }
 }

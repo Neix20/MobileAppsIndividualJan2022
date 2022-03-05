@@ -31,7 +31,7 @@ public class PwdListViewModel extends AndroidViewModel {
         return pwdList;
     }
 
-    public PasswordElem getPassword(int id) throws ExecutionException, InterruptedException {
+    public PasswordElem getPassword(long id) throws ExecutionException, InterruptedException {
         return mRepository.getPassword(id);
     }
 

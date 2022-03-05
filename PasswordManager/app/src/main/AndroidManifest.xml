@@ -23,6 +23,9 @@
         <activity
             android:name=".ui.AddPwdActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.EditPwdActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
