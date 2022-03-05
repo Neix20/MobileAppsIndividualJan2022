@@ -1,5 +1,6 @@
 package my.edu.utar.neixpasswordmanager.ui;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -84,7 +85,7 @@ public class EditPwdActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         title_txt.setText(curPwd.getTitle());
         name_txt.setText(curPwd.getUsername());
         pwd_txt.setText(curPwd.getPassword());
@@ -135,9 +136,16 @@ public class EditPwdActivity extends AppCompatActivity {
             finish();
         } else if(id == R.id.option_delete){
             // Alert Box
-            viewModel.deletePassword(curPwd);
-            Toast.makeText(this, "Successfully Deleted Record!", Toast.LENGTH_SHORT).show();
-            finish();
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, ind) -> {
+                        viewModel.deletePassword(curPwd);
+                        Toast.makeText(this, "Successfully Deleted Record!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    })
+                    .setNegativeButton("No", (dialog, ind) -> dialog.cancel())
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }

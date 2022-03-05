@@ -3,6 +3,7 @@ package my.edu.utar.neixpasswordmanager.Utils;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.widget.Toast;
 
 public class util {
     public static boolean checkIfAnyEmpty(String[] arr){
@@ -28,6 +29,7 @@ public class util {
             if (clipboard == null || clip == null)
                 return;
             clipboard.setPrimaryClip(clip);
+            Toast.makeText(context, "Successfully Copied to Clipboard!", Toast.LENGTH_SHORT).show();
         }
     }
 }

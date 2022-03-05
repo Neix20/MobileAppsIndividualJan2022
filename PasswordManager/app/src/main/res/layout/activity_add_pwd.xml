@@ -84,7 +84,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_baseline_visibility_off_24" />
+                android:src="@drawable/ic_baseline_visibility_off_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
         </RelativeLayout>
     </LinearLayout>
 

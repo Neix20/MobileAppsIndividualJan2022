@@ -1,5 +1,6 @@
 package my.edu.utar.neixpasswordmanager.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,14 +68,20 @@ public class PwdListFragment extends Fragment {
         int pos = item.getOrder();
 
         // Alert Dialog
+        new AlertDialog.Builder(this.getContext())
+                .setMessage("Are you sure you want to delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    PasswordElem pwd = viewModel.getPwdList().getValue().get(pos);
 
-        PasswordElem pwd = viewModel.getPwdList().getValue().get(pos);
+                    viewModel.deletePassword(pwd);
 
-        viewModel.deletePassword(pwd);
-
-        viewModel.getPwdList().observe(this, pwdList -> {
-            mAdapter.updateList(pwdList);
-        });
+                    viewModel.getPwdList().observe(this, pwdList -> {
+                        mAdapter.updateList(pwdList);
+                    });
+                })
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel())
+                .show();
 
         return super.onContextItemSelected(item);
     }

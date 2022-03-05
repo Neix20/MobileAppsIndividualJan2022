@@ -44,6 +44,9 @@
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_content_copy_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:tint="@color/white" />
         </RelativeLayout>
     </LinearLayout>
@@ -81,7 +84,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_baseline_content_copy_24" />
+                android:src="@drawable/ic_baseline_content_copy_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -119,7 +125,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="45dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_baseline_visibility_off_24" />
+                android:src="@drawable/ic_baseline_visibility_off_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
 
             <ImageView
                 android:id="@+id/pwd_copy_btn"
@@ -129,7 +138,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_baseline_content_copy_24" />
+                android:src="@drawable/ic_baseline_content_copy_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -167,7 +179,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_baseline_content_copy_24" />
+                android:src="@drawable/ic_baseline_content_copy_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
         </RelativeLayout>
     </LinearLayout>
 
