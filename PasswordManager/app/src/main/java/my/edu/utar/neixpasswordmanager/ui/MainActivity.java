@@ -91,15 +91,4 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> finish())
-                .setNegativeButton("No", (dialog, id) -> dialog.cancel())
-                .show();
-    }
 }
