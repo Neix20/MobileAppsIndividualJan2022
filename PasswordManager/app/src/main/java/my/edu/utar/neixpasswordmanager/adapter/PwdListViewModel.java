@@ -31,6 +31,18 @@ public class PwdListViewModel extends AndroidViewModel {
         return pwdList;
     }
 
+    public LiveData<List<PasswordElem>> getPwdListDesc(){
+        return mRepository.getPasswordElemListDesc();
+    }
+
+    public LiveData<List<PasswordElem>> getPwdListDate(){
+        return mRepository.getPasswordElemListDate();
+    }
+
+    public LiveData<List<PasswordElem>> getPwdListDateDesc(){
+        return mRepository.getPasswordElemListDateDesc();
+    }
+
     public PasswordElem getPassword(long id) throws ExecutionException, InterruptedException {
         return mRepository.getPassword(id);
     }

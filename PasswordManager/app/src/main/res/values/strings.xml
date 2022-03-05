@@ -15,4 +15,8 @@
     <string name="option_menu">Options Menu</string>
     <string name="option_save">Save Record</string>
     <string name="option_delete">Delete</string>
+    <string name="option_a_to_z"><![CDATA[A -> Z]]></string>
+    <string name="option_z_to_a"><![CDATA[Z -> A]]></string>
+    <string name="option_new_to_old"><![CDATA[Newest -> Oldest]]></string>
+    <string name="option_old_to_new"><![CDATA[Oldest -> Newest]]></string>
 </resources>

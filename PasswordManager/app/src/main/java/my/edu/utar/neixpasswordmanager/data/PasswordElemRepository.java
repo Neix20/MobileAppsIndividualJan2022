@@ -21,6 +21,15 @@ public class PasswordElemRepository {
     public LiveData<List<PasswordElem>> getPasswordElemList() {
         return passwordElemList;
     }
+    public LiveData<List<PasswordElem>> getPasswordElemListDesc() {
+        return mPasswordElemDao.getPasswordElemListDesc();
+    }
+    public LiveData<List<PasswordElem>> getPasswordElemListDate() {
+        return mPasswordElemDao.getPasswordElemListDate();
+    }
+    public LiveData<List<PasswordElem>> getPasswordElemListDateDesc() {
+        return mPasswordElemDao.getPasswordElemListDateDesc();
+    }
 
     public PasswordElem getPassword(long pwdId) throws ExecutionException, InterruptedException {
         return new getPasswordAsync(mPasswordElemDao).execute(pwdId).get();

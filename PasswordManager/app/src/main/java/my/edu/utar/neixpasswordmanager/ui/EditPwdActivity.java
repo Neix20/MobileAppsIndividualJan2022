@@ -137,7 +137,7 @@ public class EditPwdActivity extends AppCompatActivity {
         } else if(id == R.id.option_delete){
             // Alert Box
             new AlertDialog.Builder(this)
-                    .setMessage("Are you sure you want to exit?")
+                    .setMessage("Are you sure you want to delete?")
                     .setCancelable(false)
                     .setPositiveButton("Yes", (dialog, ind) -> {
                         viewModel.deletePassword(curPwd);

@@ -2,27 +2,28 @@ package my.edu.utar.neixpasswordmanager.ui;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import my.edu.utar.neixpasswordmanager.R;
 import my.edu.utar.neixpasswordmanager.adapter.PwdListAdapter;
 import my.edu.utar.neixpasswordmanager.adapter.PwdListViewModel;
 import my.edu.utar.neixpasswordmanager.data.PasswordElem;
@@ -39,12 +40,17 @@ public class PwdListFragment extends Fragment {
     private PwdListViewModel viewModel;
     private PwdListAdapter mAdapter;
 
+    private SearchView searchBar;
+    private ImageView sort_btn;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentPwdListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         mRecyclerView = binding.pwdRecView;
+        searchBar = binding.searchBar;
+        sort_btn = binding.sortBtn;
 
         viewModel = ViewModelProviders.of(this.getActivity()).get(PwdListViewModel.class);
 
@@ -55,9 +61,47 @@ public class PwdListFragment extends Fragment {
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
         // Updates Password List
         viewModel.getPwdList().observe(this, pwdList -> {
             mAdapter.updateList(pwdList);
+        });
+
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        sort_btn.setOnClickListener(view -> {
+            PopupMenu popup = new PopupMenu(this.getActivity(), sort_btn);
+            popup.getMenuInflater().inflate(R.menu.menu_sort, popup.getMenu());
+
+            //registering popup with OnMenuItemClickListener
+            popup.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if(id == R.id.option_a_to_z){
+                    viewModel.getPwdList().observe(this, pwdList -> mAdapter.updateList(pwdList));
+                } else if(id == R.id.option_z_to_a){
+                    viewModel.getPwdListDesc().observe(this, pwdList -> mAdapter.updateList(pwdList));
+                } else if(id == R.id.option_new_to_old){
+                    viewModel.getPwdListDate().observe(this, pwdList -> mAdapter.updateList(pwdList));
+                } else if(id == R.id.option_old_to_new){
+                    viewModel.getPwdListDateDesc().observe(this, pwdList -> mAdapter.updateList(pwdList));
+                }
+                return true;
+            });
+
+            popup.show();//showing popup menu
         });
 
         return root;
@@ -72,7 +116,14 @@ public class PwdListFragment extends Fragment {
                 .setMessage("Are you sure you want to delete?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, id) -> {
-                    PasswordElem pwd = viewModel.getPwdList().getValue().get(pos);
+                    PasswordElem pwd = null;
+                    try {
+                        pwd = viewModel.getPassword((long) pos);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                     viewModel.deletePassword(pwd);
 
@@ -84,6 +135,14 @@ public class PwdListFragment extends Fragment {
                 .show();
 
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.getPwdList().observe(this, pwdList -> {
+            mAdapter.updateList(pwdList);
+        });
     }
 
 
