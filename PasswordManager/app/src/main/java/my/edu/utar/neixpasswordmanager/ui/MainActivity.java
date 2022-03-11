@@ -59,12 +59,11 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_exit) {
                new AlertDialog.Builder(this)
-                        .setMessage("Are you sure you want to exit?")
+                        .setMessage("Are you sure you want to logout?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", (dialog, id) -> finish())
                         .setNegativeButton("No", (dialog, id) -> dialog.cancel())
                         .show();
-
             } else {
                 NavigationUI.onNavDestinationSelected(item, navController);
                 drawer.closeDrawers();
@@ -79,16 +78,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to logout?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> finish())
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel())
+                .show();
     }
 }
