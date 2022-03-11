@@ -93,10 +93,11 @@ public class EditPwdActivity extends AppCompatActivity {
 
         show_pass_btn.setOnClickListener(v -> ShowHidePass(v));
 
-        title_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Title", title_txt.getText().toString()));
-        name_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Name", name_txt.getText().toString()));
-        pwd_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Password", pwd_txt.getText().toString()));
-        website_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Website", website_txt.getText().toString()));
+        // Copy to Clipboard
+        title_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Title has been copied to clipboard.", title_txt.getText().toString()));
+        name_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Username has been copied to clipboard.", name_txt.getText().toString()));
+        pwd_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Password has been copied to clipboard.", pwd_txt.getText().toString()));
+        website_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "URL has been copied to clipboard.", website_txt.getText().toString()));
     }
 
     @Override

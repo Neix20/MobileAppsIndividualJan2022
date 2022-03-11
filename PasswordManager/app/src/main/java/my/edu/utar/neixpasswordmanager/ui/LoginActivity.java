@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         String master_pwd = pref.getString("master_password", null);
 
         if(pwd.equals(master_pwd)){
+            pwd_txt.setText("");a
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else{

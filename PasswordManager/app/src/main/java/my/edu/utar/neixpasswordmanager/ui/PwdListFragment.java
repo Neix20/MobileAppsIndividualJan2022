@@ -1,6 +1,7 @@
 package my.edu.utar.neixpasswordmanager.ui;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,8 @@ public class PwdListFragment extends Fragment {
     private SearchView searchBar;
     private ImageView sort_btn;
 
+    private FloatingActionButton fab;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentPwdListBinding.inflate(inflater, container, false);
@@ -51,6 +56,9 @@ public class PwdListFragment extends Fragment {
         mRecyclerView = binding.pwdRecView;
         searchBar = binding.searchBar;
         sort_btn = binding.sortBtn;
+        fab = binding.fab;
+
+        fab.setOnClickListener(v -> nAddPwd(v));
 
         viewModel = ViewModelProviders.of(this.getActivity()).get(PwdListViewModel.class);
 
@@ -145,6 +153,10 @@ public class PwdListFragment extends Fragment {
         });
     }
 
+    public void nAddPwd(View v){
+        Intent intent = new Intent(v.getContext(), AddPwdActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onDestroyView() {

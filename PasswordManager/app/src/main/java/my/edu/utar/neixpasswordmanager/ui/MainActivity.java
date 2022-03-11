@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -31,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
-    private FloatingActionButton fab;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +42,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        fab = binding.appBarMain.fab;
-
         setSupportActionBar(binding.appBarMain.toolbar);
-
-        fab.setOnClickListener(v -> nAddPwd(v));
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -72,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-    }
-
-    public void nAddPwd(View v){
-        Intent intent = new Intent(this, AddPwdActivity.class);
-        startActivity(intent);
     }
 
     @Override

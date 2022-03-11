@@ -24,9 +24,9 @@
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_change_mas_pwd.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
-        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_gen_pwd.xml" value="0.25416666666666665" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_gen_pwd.xml" value="0.264" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_pwd_list.xml" value="0.1" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_pwd_list.xml" value="0.264" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/nav_header_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/layout/pwd_list_item.xml" value="0.25416666666666665" />
@@ -38,6 +38,8 @@
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/menu/menu_sort.xml" value="0.25416666666666665" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
         <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/mipmap-anydpi-v26/login_logo.xml" value="0.2703125" />
+        <entry key="..\:/Document Y3S3/Mobile Apps/Assignment/Individual_Assignment/PasswordManager/app/src/main/res/mipmap-anydpi-v26/login_logo_round.xml" value="0.2703125" />
       </map>
     </option>
   </component>
