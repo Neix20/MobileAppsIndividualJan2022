@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,15 +21,15 @@ import my.edu.utar.neixpasswordmanager.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String TAG = LoginActivity.class.getSimpleName();
+
     private ActivityLoginBinding binding;
 
     private EditText pwd_txt;
-
     private Button submit_btn;
-
     private ImageView show_pass_btn;
 
-    private String master_pwd;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,17 +44,14 @@ public class LoginActivity extends AppCompatActivity {
         show_pass_btn = binding.showPassBtn;
 
         // Check if Saved Preference Exits
-        SharedPreferences pref = getSharedPreferences("mySharedPreferences", MODE_PRIVATE);
-
-        master_pwd = pref.getString("master_password", null);
+        pref = getSharedPreferences("mySharedPreferences", MODE_PRIVATE);
 
         // If Master Password Does Not Exist
-        if(master_pwd == null){
+        if(pref.getString("master_password", null) == null){
             // Create 2 TextView and Validate (Future Work)
             SharedPreferences.Editor prefEditor = pref.edit();
             prefEditor.putString("master_password", "root");
             prefEditor.commit();
-            master_pwd = "root";
         }
 
         show_pass_btn.setOnClickListener(v -> ShowHidePass(v));
@@ -64,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void submitPassword(View v){
         String pwd = pwd_txt.getText().toString();
+
+        String master_pwd = pref.getString("master_password", null);
 
         if(pwd.equals(master_pwd)){
             Intent intent = new Intent(this, MainActivity.class);
