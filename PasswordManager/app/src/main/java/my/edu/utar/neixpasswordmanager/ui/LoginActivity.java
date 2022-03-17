@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import my.edu.utar.neixpasswordmanager.R;
+import my.edu.utar.neixpasswordmanager.Utils.util;
 import my.edu.utar.neixpasswordmanager.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,9 +49,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // If Master Password Does Not Exist
         if(pref.getString("master_password", null) == null){
-            // Create 2 TextView and Validate (Future Work)
             SharedPreferences.Editor prefEditor = pref.edit();
             prefEditor.putString("master_password", "root");
+            prefEditor.commit();
+        }
+
+        // If Decryption Key Does not Exist
+        if(pref.getString("decrypt_key", null) == null){
+            SharedPreferences.Editor prefEditor = pref.edit();
+            String key = util.genPassword(16, true, true, true, false);
+            prefEditor.putString("decrypt_key", key);
             prefEditor.commit();
         }
 
@@ -66,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         String master_pwd = pref.getString("master_password", null);
 
         if(pwd.equals(master_pwd)){
-            pwd_txt.setText("");a
+            pwd_txt.setText("");
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else{

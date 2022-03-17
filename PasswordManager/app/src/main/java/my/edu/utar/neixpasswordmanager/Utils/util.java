@@ -3,11 +3,18 @@ package my.edu.utar.neixpasswordmanager.Utils;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.util.Base64;
 import android.widget.Toast;
 
+import java.security.Key;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 public class util {
+    private static final String ALGORITHM = "AES";
+
     public static boolean checkIfAnyEmpty(String[] arr){
         for(String s : arr){
             if(s.isEmpty()){
@@ -83,5 +90,30 @@ public class util {
         return (!needUpperCase || hasUpper) && (!needLowerCase || hasLower) && (!needDigit || hasDigit) && (!needSymbol || hasSymbol);
     }
 
+    public static String encrypt(String value, String KEY) throws Exception
+    {
+        Key key = generateKey(KEY);
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte [] encryptedByteValue = cipher.doFinal(value.getBytes("utf-8"));
+        String encryptedValue64 = Base64.encodeToString(encryptedByteValue, Base64.DEFAULT);
+        return encryptedValue64;
+    }
 
+    public static String decrypt(String value, String KEY) throws Exception
+    {
+        Key key = generateKey(KEY);
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] decryptedValue64 = Base64.decode(value, Base64.DEFAULT);
+        byte [] decryptedByteValue = cipher.doFinal(decryptedValue64);
+        String decryptedValue = new String(decryptedByteValue,"utf-8");
+        return decryptedValue;
+    }
+
+    private static Key generateKey(String KEY) throws Exception
+    {
+        Key key = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+        return key;
+    }
 }

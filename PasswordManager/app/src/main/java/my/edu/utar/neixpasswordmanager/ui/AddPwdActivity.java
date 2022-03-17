@@ -1,8 +1,10 @@
 package my.edu.utar.neixpasswordmanager.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +37,8 @@ public class AddPwdActivity extends AppCompatActivity {
 
     private ImageView show_pass_btn;
 
+    private SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,8 @@ public class AddPwdActivity extends AppCompatActivity {
         website_txt = binding.websiteTxt;
 
         show_pass_btn = binding.showPassBtn;
+
+        pref = this.getSharedPreferences("mySharedPreferences", MODE_PRIVATE);
 
         // Initialize Objects
         viewModel = ViewModelProviders.of(AddPwdActivity.this).get(PwdListViewModel.class);
@@ -73,10 +79,25 @@ public class AddPwdActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.option_save) {
 
+            String pwd_str = pwd_txt.getText().toString();
+            String key = pref.getString("decrypt_key", "");
+
+            Log.e(TAG, key);
+            Log.e(TAG, pwd_str);
+
+            // Encrypt Password using AES Encryption
+            try {
+                pwd_str = util.encrypt(pwd_str, key);
+                Log.e(TAG, pwd_str);
+            } catch (Exception e) {
+                Log.e(TAG, String.valueOf(e));
+                e.printStackTrace();
+            }
+
             String[] txt_arr = {
                     title_txt.getText().toString(),
                     name_txt.getText().toString(),
-                    pwd_txt.getText().toString(),
+                    pwd_str,
                     website_txt.getText().toString()
             };
 

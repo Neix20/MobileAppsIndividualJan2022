@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -48,6 +49,8 @@ public class EditPwdActivity extends AppCompatActivity {
     private ImageView pwd_copy_btn;
     private ImageView website_copy_btn;
 
+    private SharedPreferences pref;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -75,6 +78,8 @@ public class EditPwdActivity extends AppCompatActivity {
         pwd_copy_btn = binding.pwdCopyBtn;
         website_copy_btn = binding.websiteCopyBtn;
 
+        pref = this.getSharedPreferences("mySharedPreferences", MODE_PRIVATE);
+
         Intent mIntent = getIntent();
         Long ind = (long) mIntent.getLongExtra("id", 0);
 
@@ -88,7 +93,19 @@ public class EditPwdActivity extends AppCompatActivity {
 
         title_txt.setText(curPwd.getTitle());
         name_txt.setText(curPwd.getUsername());
-        pwd_txt.setText(curPwd.getPassword());
+
+        // Decrypt Password
+        String pwd_str = curPwd.getPassword();
+        String key = pref.getString("decrypt_key", "");
+
+        // Encrypt Password using AES Encryption
+        try {
+            pwd_str = util.decrypt(pwd_str, key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        pwd_txt.setText(pwd_str);
         website_txt.setText(curPwd.getWebsite());
 
         show_pass_btn.setOnClickListener(v -> ShowHidePass(v));
@@ -117,10 +134,20 @@ public class EditPwdActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.option_save) {
 
+            String pwd_str = pwd_txt.getText().toString();
+            String key = pref.getString("decrypt_key", "");
+
+            // Encrypt Password using AES Encryption
+            try {
+                pwd_str = util.encrypt(pwd_str, key);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             String[] txt_arr = {
                     title_txt.getText().toString(),
                     name_txt.getText().toString(),
-                    pwd_txt.getText().toString(),
+                    pwd_str,
                     website_txt.getText().toString()
             };
 
