@@ -223,14 +223,12 @@ public class PasswordElem {
 
     @Override
     public String toString() {
-        return "PasswordElem{" +
-                "id=" + id +
+        return "id=" + id +
                 ", title='" + title + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", website='" + website + '\'' +
                 ", created_date=" + created_date +
-                ", last_updated_date=" + last_updated_date +
-                '}';
+                ", last_updated_date=" + last_updated_date;
     }
 }

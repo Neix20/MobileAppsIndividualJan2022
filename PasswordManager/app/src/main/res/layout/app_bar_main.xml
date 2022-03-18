@@ -18,7 +18,6 @@
             android:background="?attr/colorPrimary"
             app:titleTextColor="@color/white"
             app:popupTheme="@style/Theme.NeixPasswordManager.PopupOverlay" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
