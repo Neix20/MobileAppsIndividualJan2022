@@ -68,7 +68,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:valueFrom="4"
-        android:valueTo="50"
+        android:valueTo="32"
         app:labelBehavior="gone" />
 
     <TextView

@@ -27,6 +27,27 @@ public class PasswordElem {
     @ColumnInfo(name = "website")
     public String website;
 
+    @ColumnInfo(name = "pin_number")
+    public String pin_number;
+
+    @ColumnInfo(name = "security_question_1")
+    public String security_question_1;
+
+    @ColumnInfo(name = "security_answer_1")
+    public String security_answer_1;
+
+    @ColumnInfo(name = "security_question_2")
+    public String security_question_2;
+
+    @ColumnInfo(name = "security_answer_2")
+    public String security_answer_2;
+
+    @ColumnInfo(name = "security_question_3")
+    public String security_question_3;
+
+    @ColumnInfo(name = "security_answer_3")
+    public String security_answer_3;
+
     @ColumnInfo(name = "created_date")
     public Calendar created_date;
 
@@ -38,15 +59,16 @@ public class PasswordElem {
         this.username = "";
         this.password = "";
         this.website = "";
-        this.created_date = Calendar.getInstance();
-        this.last_updated_date = Calendar.getInstance();
-    }
+        this.pin_number = "";
 
-    public PasswordElem(String title, String username, String password, String website) {
-        this.title = title;
-        this.username = username;
-        this.password = password;
-        this.website = website;
+        this.security_question_1 = "";
+        this.security_question_2 = "";
+        this.security_answer_3 = "";
+
+        this.security_answer_1 = "";
+        this.security_answer_2 = "";
+        this.security_answer_3 = "";
+
         this.created_date = Calendar.getInstance();
         this.last_updated_date = Calendar.getInstance();
     }
@@ -107,11 +129,78 @@ public class PasswordElem {
         this.last_updated_date = last_updated_date;
     }
 
+    public String getPin_number() {
+        return pin_number;
+    }
+
+    public void setPin_number(String pin_number) {
+        this.pin_number = pin_number;
+    }
+
+    public String getSecurity_question_1() {
+        return security_question_1;
+    }
+
+    public void setSecurity_question_1(String security_question_1) {
+        this.security_question_1 = security_question_1;
+    }
+
+    public String getSecurity_answer_1() {
+        return security_answer_1;
+    }
+
+    public void setSecurity_answer_1(String security_answer_1) {
+        this.security_answer_1 = security_answer_1;
+    }
+
+    public String getSecurity_question_2() {
+        return security_question_2;
+    }
+
+    public void setSecurity_question_2(String security_question_2) {
+        this.security_question_2 = security_question_2;
+    }
+
+    public String getSecurity_answer_2() {
+        return security_answer_2;
+    }
+
+    public void setSecurity_answer_2(String security_answer_2) {
+        this.security_answer_2 = security_answer_2;
+    }
+
+    public String getSecurity_question_3() {
+        return security_question_3;
+    }
+
+    public void setSecurity_question_3(String security_question_3) {
+        this.security_question_3 = security_question_3;
+    }
+
+    public String getSecurity_answer_3() {
+        return security_answer_3;
+    }
+
+    public void setSecurity_answer_3(String security_answer_3) {
+        this.security_answer_3 = security_answer_3;
+    }
+
     public void updateValue(String[] arr){
         this.title = arr[0];
         this.username = arr[1];
         this.password = arr[2];
         this.website = arr[3];
+        this.last_updated_date = Calendar.getInstance();
+    }
+
+    public void updateOptionalValue(String[] arr){
+        this.pin_number = arr[0];
+        this.security_question_1 = arr[1];
+        this.security_answer_1 = arr[2];
+        this.security_question_2 = arr[3];
+        this.security_answer_2 = arr[4];
+        this.security_question_3 = arr[5];
+        this.security_answer_3 = arr[6];
         this.last_updated_date = Calendar.getInstance();
     }
 

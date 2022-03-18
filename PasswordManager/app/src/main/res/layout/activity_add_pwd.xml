@@ -1,117 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray_200">
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:background="@color/primary_main">
-        <TextView
-            android:id="@+id/title_txtView"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="50dp"
-            android:textColor="@color/white" />
-        <EditText
-            android:id="@+id/title_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"
-            android:hint="Enter your entry title" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:id="@+id/name_txtView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textSize="30dp"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/name_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your username" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:id="@+id/pwd_txtView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:textSize="30dp"
-            android:textColor="@color/black" />
-
-        <RelativeLayout
-            android:id="@+id/pwd_rl"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@color/primary_main">
+            <TextView
+                android:id="@+id/title_txtView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="50dp"
+                android:textColor="@color/white" />
             <EditText
-                android:id="@+id/pwd_txt"
+                android:id="@+id/title_txt"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Enter your password here" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/white"
+                android:hint="Enter your entry title" />
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/show_pass_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_baseline_visibility_off_24"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:id="@+id/website_txtView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Website"
-            android:textSize="30dp"
-            android:textColor="@color/black" />
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/name_txtView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="30dp"
+                android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/website_txt"
-            android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/name_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your username" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textWebEmailAddress"
-            android:hint="Enter the URL Link" />
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/pwd_txtView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="30dp"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:id="@+id/pwd_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pwd_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Enter your password here" />
+
+                <ImageView
+                    android:id="@+id/show_pass_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_baseline_visibility_off_24"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/website_txtView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:textSize="30dp"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/website_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textWebEmailAddress"
+                android:hint="Enter the URL Link" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pin_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/pinNo_txtView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Emergency PIN"
+                android:textSize="30dp"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/pinNo_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Optional: Enter Emergency PIN"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sec_1_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <EditText
+                android:id="@+id/secQes1_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Security Question 1"
+                android:textSize="30dp" />
+            <EditText
+                android:id="@+id/secAns1_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Optional: Enter Answer" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sec_2_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <EditText
+                android:id="@+id/secQes2_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Security Question 2"
+                android:textSize="30dp" />
+            <EditText
+                android:id="@+id/secAns2_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Optional: Enter Answer" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sec_3_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <EditText
+                android:id="@+id/secQes3_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Security Question 3"
+                android:textSize="30dp" />
+            <EditText
+                android:id="@+id/secAns3_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Optional: Enter Answer" />
+        </LinearLayout>
     </LinearLayout>
 
-
-</LinearLayout>
+</ScrollView>

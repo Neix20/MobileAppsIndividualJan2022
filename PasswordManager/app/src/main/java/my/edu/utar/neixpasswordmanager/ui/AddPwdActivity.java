@@ -35,6 +35,17 @@ public class AddPwdActivity extends AppCompatActivity {
     private EditText pwd_txt;
     private EditText website_txt;
 
+    // Optional
+    private EditText pinNo_txt;
+
+    private EditText secQes1_txt;
+    private EditText secQes2_txt;
+    private EditText secQes3_txt;
+
+    private EditText secAns1_txt;
+    private EditText secAns2_txt;
+    private EditText secAns3_txt;
+
     private ImageView show_pass_btn;
 
     private SharedPreferences pref;
@@ -51,6 +62,17 @@ public class AddPwdActivity extends AppCompatActivity {
         name_txt = binding.nameTxt;
         pwd_txt = binding.pwdTxt;
         website_txt = binding.websiteTxt;
+
+        // Optional Elements
+        pinNo_txt = binding.pinNoTxt;
+
+        secQes1_txt = binding.secQes1Txt;
+        secQes2_txt = binding.secQes2Txt;
+        secQes3_txt = binding.secQes3Txt;
+
+        secAns1_txt = binding.secAns1Txt;
+        secAns2_txt = binding.secAns2Txt;
+        secAns3_txt = binding.secAns3Txt;
 
         show_pass_btn = binding.showPassBtn;
 
@@ -82,15 +104,10 @@ public class AddPwdActivity extends AppCompatActivity {
             String pwd_str = pwd_txt.getText().toString();
             String key = pref.getString("decrypt_key", "");
 
-            Log.e(TAG, key);
-            Log.e(TAG, pwd_str);
-
             // Encrypt Password using AES Encryption
             try {
                 pwd_str = util.encrypt(pwd_str, key);
-                Log.e(TAG, pwd_str);
             } catch (Exception e) {
-                Log.e(TAG, String.valueOf(e));
                 e.printStackTrace();
             }
 
@@ -108,8 +125,19 @@ public class AddPwdActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
 
+            String[] txt_optional_arr = {
+                    pinNo_txt.getText().toString().isEmpty() ? "" : pinNo_txt.getText().toString(),
+                    secQes1_txt.getText().toString().isEmpty() ? "" : secQes1_txt.getText().toString(),
+                    secAns1_txt.getText().toString().isEmpty() ? "" : secAns1_txt.getText().toString(),
+                    secQes2_txt.getText().toString().isEmpty() ? "" : secQes2_txt.getText().toString(),
+                    secAns2_txt.getText().toString().isEmpty() ? "" : secAns2_txt.getText().toString(),
+                    secQes3_txt.getText().toString().isEmpty() ? "" : secQes3_txt.getText().toString(),
+                    secAns3_txt.getText().toString().isEmpty() ? "" : secAns3_txt.getText().toString()
+            };
+
             PasswordElem pwd = new PasswordElem();
             pwd.updateValue(txt_arr);
+            pwd.updateOptionalValue(txt_optional_arr);
             viewModel.insertPassword(pwd);
             Toast.makeText(this, "Successfully Save Record!", Toast.LENGTH_SHORT).show();
             finish();

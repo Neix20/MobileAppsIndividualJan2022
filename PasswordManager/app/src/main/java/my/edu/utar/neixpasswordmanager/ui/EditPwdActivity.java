@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +51,25 @@ public class EditPwdActivity extends AppCompatActivity {
     private ImageView pwd_copy_btn;
     private ImageView website_copy_btn;
 
+    // Optional Elements
+    private EditText pinNo_txt;
+    private TextView secQes1_txtView;
+    private TextView secQes2_txtView;
+    private TextView secQes3_txtView;
+    private EditText secAns1_txt;
+    private EditText secAns2_txt;
+    private EditText secAns3_txt;
+
+    private ImageView pinNo_copy_btn;
+    private ImageView secAns1_copy_btn;
+    private ImageView secAns2_copy_btn;
+    private ImageView secAns3_copy_btn;
+
+    private LinearLayout pin_ll;
+    private LinearLayout sec_1_ll;
+    private LinearLayout sec_2_ll;
+    private LinearLayout sec_3_ll;
+
     private SharedPreferences pref;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +98,27 @@ public class EditPwdActivity extends AppCompatActivity {
         name_copy_btn = binding.nameCopyBtn;
         pwd_copy_btn = binding.pwdCopyBtn;
         website_copy_btn = binding.websiteCopyBtn;
+
+        // Optional
+        pinNo_txt = binding.pinNoTxt;
+
+        secQes1_txtView = binding.secQes1TxtView;
+        secQes2_txtView = binding.secQes2TxtView;
+        secQes3_txtView = binding.secQes3TxtView;
+
+        secAns1_txt = binding.secAns1Txt;
+        secAns2_txt = binding.secAns2Txt;
+        secAns3_txt = binding.secAns3Txt;
+
+        pinNo_copy_btn = binding.pinNoCopyBtn;
+        secAns1_copy_btn = binding.secAns1CopyBtn;
+        secAns2_copy_btn = binding.secAns2CopyBtn;
+        secAns3_copy_btn = binding.secAns3CopyBtn;
+
+        pin_ll = binding.pinLl;
+        sec_1_ll = binding.sec1Ll;
+        sec_2_ll = binding.sec2Ll;
+        sec_3_ll = binding.sec3Ll;
 
         pref = this.getSharedPreferences("mySharedPreferences", MODE_PRIVATE);
 
@@ -108,13 +150,48 @@ public class EditPwdActivity extends AppCompatActivity {
         pwd_txt.setText(pwd_str);
         website_txt.setText(curPwd.getWebsite());
 
+        pinNo_txt.setText(curPwd.getPin_number());
+        if(curPwd.getPin_number().isEmpty()){
+            pin_ll.setVisibility(View.GONE);
+        }
+
+        secQes1_txtView.setText(curPwd.getSecurity_question_1());
+        secAns1_txt.setText(curPwd.getSecurity_answer_1());
+        if(curPwd.getSecurity_question_1().isEmpty()){
+            sec_1_ll.setVisibility(View.GONE);
+        }
+
+        secQes2_txtView.setText(curPwd.getSecurity_question_2());
+        secAns2_txt.setText(curPwd.getSecurity_answer_2());
+        if(curPwd.getSecurity_question_2().isEmpty()){
+            sec_2_ll.setVisibility(View.GONE);
+        }
+
+        secQes3_txtView.setText(curPwd.getSecurity_question_3());
+        secAns3_txt.setText(curPwd.getSecurity_answer_3());
+        if(curPwd.getSecurity_question_3().isEmpty()){
+            sec_3_ll.setVisibility(View.GONE);
+        }
+
         show_pass_btn.setOnClickListener(v -> ShowHidePass(v));
 
         // Copy to Clipboard
-        title_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Title has been copied to clipboard.", title_txt.getText().toString()));
-        name_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Username has been copied to clipboard.", name_txt.getText().toString()));
-        pwd_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "Password has been copied to clipboard.", pwd_txt.getText().toString()));
-        website_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(v.getContext(), "URL has been copied to clipboard.", website_txt.getText().toString()));
+        title_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "Title has been copied to clipboard.", title_txt.getText().toString()));
+        name_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "Username has been copied to clipboard.", name_txt.getText().toString()));
+        pwd_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "Password has been copied to clipboard.", pwd_txt.getText().toString()));
+        website_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "URL has been copied to clipboard.", website_txt.getText().toString()));
+        pinNo_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "PIN Number has been copied to clipboard.", pinNo_txt.getText().toString()));
+        secAns1_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "Security Answer has been copied to clipboard.", secAns1_txt.getText().toString()));
+        secAns2_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "Security Answer has been copied to clipboard.", secAns2_txt.getText().toString()));
+        secAns3_copy_btn.setOnClickListener(v -> util.copyCodeInClipBoard(
+                v.getContext(), "Security Answer has been copied to clipboard.", secAns3_txt.getText().toString()));
     }
 
     @Override
@@ -158,7 +235,19 @@ public class EditPwdActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
 
+            String[] txt_optional_arr = {
+                    pinNo_txt.getText().toString().isEmpty() ? "" : pinNo_txt.getText().toString(),
+                    secQes1_txtView.getText().toString().isEmpty() ? "" : secQes1_txtView.getText().toString(),
+                    secAns1_txt.getText().toString().isEmpty() ? "" : secAns1_txt.getText().toString(),
+                    secQes2_txtView.getText().toString().isEmpty() ? "" : secQes2_txtView.getText().toString(),
+                    secAns2_txt.getText().toString().isEmpty() ? "" : secAns2_txt.getText().toString(),
+                    secQes3_txtView.getText().toString().isEmpty() ? "" : secQes3_txtView.getText().toString(),
+                    secAns3_txt.getText().toString().isEmpty() ? "" : secAns3_txt.getText().toString()
+            };
+
             curPwd.updateValue(txt_arr);
+            curPwd.updateOptionalValue(txt_optional_arr);
+
             viewModel.updatePassword(curPwd);
             Toast.makeText(this, "Successfully Edited Record!", Toast.LENGTH_SHORT).show();
             finish();

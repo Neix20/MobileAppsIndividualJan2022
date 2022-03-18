@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to logout?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> finish())
+                .setPositiveButton("Yes", (dialog, id) -> finishAffinity())
                 .setNegativeButton("No", (dialog, id) -> dialog.cancel())
                 .show();
     }
