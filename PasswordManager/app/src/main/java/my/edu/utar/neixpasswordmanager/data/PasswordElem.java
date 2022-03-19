@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 import java.util.Calendar;
 import java.util.Objects;
 
+import my.edu.utar.neixpasswordmanager.Utils.util;
+
 
 @Entity(tableName = "password_tbl")
 public class PasswordElem {
@@ -221,12 +223,11 @@ public class PasswordElem {
         return Objects.hash(id, title, username, password, website, created_date, last_updated_date);
     }
 
-    @Override
-    public String toString() {
+    public String genPwdStr(String key) throws Exception {
         return "id=" + id +
                 ", title='" + title + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + util.decrypt(password, key) + '\'' +
                 ", website='" + website + '\'' +
                 ", created_date=" + created_date +
                 ", last_updated_date=" + last_updated_date;

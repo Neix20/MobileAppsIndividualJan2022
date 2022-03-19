@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PwdListViewModel viewModel;
 
+    private SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(PwdListViewModel.class);
 
+        pref = this.getSharedPreferences("mySharedPreferences", MODE_PRIVATE);
+
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
@@ -62,14 +67,15 @@ public class MainActivity extends AppCompatActivity {
                 FileOutputStream fos;
 
                 String fileName = "PwdDb.txt";
+                String key = pref.getString("decrypt_key", "");
 
                 try {
                     fos = openFileOutput(fileName, MODE_PRIVATE);
                     viewModel.getPwdList().observe(this, pwdList -> {
                         for (PasswordElem elem : pwdList) {
                             try {
-                                fos.write(String.format("%s\n", elem.toString()).getBytes());
-                            } catch (IOException e) {
+                                fos.write(String.format("%s\n", elem.genPwdStr(key)).getBytes());
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
